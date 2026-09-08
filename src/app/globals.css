@@ -1,0 +1,64 @@
+@import "tailwindcss";
+
+:root {
+  --background: #fdfdfc;
+  --surface: #ffffff;
+  --accent-tint: #f3f1fe;
+  --secondary-tint: #e4e9ff;
+  --foreground: #171717;
+  --muted-foreground: #6b6b6b;
+  --border: #ebebe8;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-accent-tint: var(--accent-tint);
+  --color-secondary-tint: var(--secondary-tint);
+  --color-foreground: var(--foreground);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+
+  --font-sans: var(--font-inter);
+}
+
+/* clip, not hidden — `hidden` here silently breaks position: sticky. */
+html {
+  overflow-x: clip;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  max-width: 100%;
+  overflow-x: clip;
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), system-ui, sans-serif;
+}
+
+/* One orchestrated page-load reveal, staggered via animation-delay. */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-rise {
+  animation: rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
