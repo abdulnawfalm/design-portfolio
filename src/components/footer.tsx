@@ -62,10 +62,10 @@ export default function Footer() {
 
           <Link
             href="/contact"
-            className="group inline-flex shrink-0 items-center gap-4 rounded-full bg-white py-4 pl-7 pr-4 text-base font-medium text-black transition-colors duration-300 hover:bg-white/85 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white motion-reduce:transition-none"
+            className="group inline-flex w-full items-center justify-between gap-4 rounded-full bg-white py-3 pl-7 pr-3 text-base font-medium text-black transition-colors duration-300 hover:bg-white/85 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white motion-reduce:transition-none sm:w-auto sm:shrink-0 sm:justify-start"
           >
             Say hello
-            <span className="flex h-9 w-9 items-center justify-center rounded-full bg-black text-white transition-transform duration-300 group-hover:rotate-45 motion-reduce:transition-none">
+            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-black text-white transition-transform duration-300 group-hover:rotate-45 motion-reduce:transition-none">
               <svg
                 viewBox="0 0 24 24"
                 fill="none"

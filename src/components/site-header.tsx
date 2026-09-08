@@ -72,14 +72,14 @@ function RollingLink({ item, current }: { item: NavItem; current: boolean }) {
     >
       <span className="relative block overflow-hidden leading-[1.35]">
         <span
-          className="block transition-transform duration-[450ms] group-hover:-translate-y-full group-focus-visible:-translate-y-full motion-reduce:transition-none motion-reduce:group-hover:translate-y-0"
+          className="block transition-transform duration-[380ms] group-hover:-translate-y-full group-focus-visible:-translate-y-full motion-reduce:transition-none motion-reduce:group-hover:translate-y-0"
           style={{ transitionTimingFunction: EASE }}
         >
           {item.label}
         </span>
         <span
           aria-hidden="true"
-          className="absolute inset-0 block translate-y-full transition-transform duration-[450ms] group-hover:translate-y-0 group-focus-visible:translate-y-0 motion-reduce:hidden"
+          className="absolute inset-0 block translate-y-full transition-transform duration-[380ms] group-hover:translate-y-0 group-focus-visible:translate-y-0 motion-reduce:hidden"
           style={{ transitionTimingFunction: EASE }}
         >
           {item.label}
@@ -143,8 +143,20 @@ export default function SiteHeader() {
           : "border-b border-transparent",
       ].join(" ")}
     >
+      <style>{`
+        @keyframes header-in {
+          from { opacity: 0; transform: translateY(-10px) }
+          to   { opacity: 1; transform: translateY(0) }
+        }
+        .header-in { animation: header-in 600ms cubic-bezier(0.16, 1, 0.3, 1) both }
+        @media (prefers-reduced-motion: reduce) { .header-in { animation: none } }
+      `}</style>
+
       {/* Meta row: local time left, location right */}
-      <div className="flex items-baseline justify-between px-5 pt-4 sm:px-8 lg:px-12">
+      <div
+        className="header-in flex items-baseline justify-between px-5 pt-4 sm:px-8 lg:px-12"
+        style={{ animationDelay: "60ms" }}
+      >
         <span
           className="inline-block min-w-[4.5rem] font-mono text-[11px] tabular-nums text-white/55 sm:text-xs"
           suppressHydrationWarning
@@ -158,15 +170,20 @@ export default function SiteHeader() {
       <div className="mt-2.5 flex items-center justify-between px-5 pb-4 sm:mt-3 sm:px-8 lg:px-12">
         <Link
           href="/"
-          className="relative z-50 text-sm font-semibold text-white transition-opacity hover:opacity-70 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white sm:text-base"
+          style={{ animationDelay: "160ms" }}
+          className="header-in relative z-50 text-sm font-semibold text-white transition-opacity hover:opacity-70 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white sm:text-base"
         >
           ABDUL NAWFAL
         </Link>
 
         <nav aria-label="Primary" className="hidden md:block">
           <ul className="flex items-center gap-9">
-            {NAV.map((item) => (
-              <li key={item.href}>
+            {NAV.map((item, i) => (
+              <li
+                key={item.href}
+                className="header-in"
+                style={{ animationDelay: `${260 + i * 70}ms` }}
+              >
                 <RollingLink item={item} current={isCurrent(item.href)} />
               </li>
             ))}
@@ -179,7 +196,8 @@ export default function SiteHeader() {
           onClick={() => setMenuOpen((open) => !open)}
           aria-expanded={menuOpen}
           aria-controls="mobile-nav"
-          className="group relative z-50 -mr-1 flex h-10 w-10 items-center justify-center focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white md:hidden"
+          style={{ animationDelay: "260ms" }}
+          className="header-in group relative z-50 -mr-1 flex h-10 w-10 items-center justify-center focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white md:hidden"
         >
           <span className="sr-only">{menuOpen ? "Close menu" : "Open menu"}</span>
           <span aria-hidden="true" className="relative block h-3 w-6">
@@ -187,7 +205,7 @@ export default function SiteHeader() {
             <span
               className={[
                 "absolute left-0 top-0 block h-px w-full origin-center bg-white",
-                "transition-transform duration-[450ms] motion-reduce:transition-none",
+                "transition-transform duration-[300ms] motion-reduce:transition-none",
                 menuOpen ? "translate-y-[6px] rotate-45" : "translate-y-0 rotate-0",
               ].join(" ")}
               style={{ transitionTimingFunction: EASE }}
@@ -196,14 +214,14 @@ export default function SiteHeader() {
             <span
               className={[
                 "absolute bottom-0 left-0 block h-px origin-center bg-white",
-                "transition-[transform,width] duration-[450ms] motion-reduce:transition-none",
+                "transition-[transform,width] duration-[300ms] motion-reduce:transition-none",
                 menuOpen
                   ? "w-full -translate-y-[6px] -rotate-45"
                   : "w-2/3 translate-y-0 rotate-0 group-hover:w-full group-focus-visible:w-full",
               ].join(" ")}
               style={{
                 transitionTimingFunction: EASE,
-                transitionDelay: menuOpen ? "60ms" : "0ms",
+                transitionDelay: menuOpen ? "40ms" : "0ms",
               }}
             />
           </span>
@@ -217,7 +235,7 @@ export default function SiteHeader() {
         aria-hidden={!menuOpen}
         className={[
           "fixed inset-0 z-40 flex flex-col justify-between bg-black/95 px-5 pb-10 pt-28 backdrop-blur-xl md:hidden",
-          "transition-[clip-path,visibility] duration-[600ms] motion-reduce:transition-none",
+          "transition-[clip-path,visibility] duration-[420ms] motion-reduce:transition-none",
           menuOpen
             ? "visible [clip-path:inset(0_0_0_0)]"
             : "invisible pointer-events-none [clip-path:inset(0_0_100%_0)]",
@@ -236,13 +254,13 @@ export default function SiteHeader() {
                   className={[
                     "block py-3 text-3xl font-semibold",
                     isCurrent(item.href) ? "text-white" : "text-white/80",
-                    "transition-[transform,opacity] duration-[550ms] motion-reduce:transition-none",
+                    "transition-[transform,opacity] duration-[380ms] motion-reduce:transition-none",
                     "focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white",
                     menuOpen ? "translate-y-0 opacity-100" : "translate-y-full opacity-0",
                   ].join(" ")}
                   style={{
                     transitionTimingFunction: EASE,
-                    transitionDelay: menuOpen ? `${180 + i * 80}ms` : "0ms",
+                    transitionDelay: menuOpen ? `${90 + i * 55}ms` : "0ms",
                   }}
                 >
                   {item.label}
@@ -255,10 +273,10 @@ export default function SiteHeader() {
         <div
           className={[
             "flex items-baseline justify-between text-[11px] text-white/45",
-            "transition-opacity duration-500 motion-reduce:transition-none",
+            "transition-opacity duration-300 motion-reduce:transition-none",
             menuOpen ? "opacity-100" : "opacity-0",
           ].join(" ")}
-          style={{ transitionDelay: menuOpen ? "440ms" : "0ms" }}
+          style={{ transitionDelay: menuOpen ? "260ms" : "0ms" }}
         >
           <span
             className="inline-block min-w-[4.5rem] font-mono tabular-nums"
