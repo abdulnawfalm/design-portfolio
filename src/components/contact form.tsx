@@ -184,10 +184,10 @@ export default function ContactForm() {
         <button
           type="submit"
           disabled={status === "sending"}
-          className="group inline-flex items-center gap-4 rounded-full bg-white py-4 pl-7 pr-4 text-base font-medium text-black transition-colors duration-300 hover:bg-white/85 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white disabled:opacity-60 motion-reduce:transition-none"
+          className="group inline-flex w-full items-center justify-between gap-4 rounded-full bg-white py-3 pl-7 pr-3 text-base font-medium text-black transition-colors duration-300 hover:bg-white/85 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white disabled:opacity-60 motion-reduce:transition-none sm:w-auto sm:justify-start"
         >
           {status === "sending" ? "Sending" : "Send message"}
-          <span className="flex h-9 w-9 items-center justify-center rounded-full bg-black text-white transition-transform duration-300 group-hover:rotate-45 motion-reduce:transition-none">
+          <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-black text-white transition-transform duration-300 group-hover:rotate-45 motion-reduce:transition-none">
             <svg
               viewBox="0 0 24 24"
               fill="none"

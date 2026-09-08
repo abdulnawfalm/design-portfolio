@@ -12,37 +12,37 @@ export const PROJECTS: Project[] = [
   {
     slug: "fleet-operations-platform",
     title: "Fleet Operations Platform",
-    image: "/projects/fleet-operations.jpg",
+    image: "/projects/project-1.jpeg",
     alt: "Vessel scheduling board with a fleet status sidebar",
   },
   {
     slug: "hr-dashboard-redesign",
     title: "HR Dashboard Redesign",
-    image: "/projects/hr-dashboard.jpg",
+    image: "/projects/project-2.jpg",
     alt: "Employee directory and leave approval queue",
   },
   {
     slug: "field-service-app",
     title: "Field Service App",
-    image: "/projects/field-service.jpg",
+    image: "/projects/project-3.png",
     alt: "Mobile job card with checklist and photo capture",
   },
   {
     slug: "property-listings",
     title: "Property Listings",
-    image: "/projects/property-listings.jpg",
+    image: "/projects/project-4.png",
     alt: "Search results grid with map and filter panel",
   },
   {
     slug: "banking-onboarding",
     title: "Banking Onboarding",
-    image: "/projects/banking-onboarding.jpg",
+    image: "/projects/project-5.png",
     alt: "Multi-step account opening flow with document upload",
   },
   {
     slug: "studio-brand-system",
     title: "Studio Brand System",
-    image: "/projects/brand-system.jpg",
+    image: "/projects/project-6.jpeg",
     alt: "Wordmark, colour ramp and type specimen sheet",
   },
 ];
