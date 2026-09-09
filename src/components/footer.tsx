@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 /** Replace with the real address and profiles */
-const EMAIL = "hello@abdulnawfal.com";
+const EMAIL = "abdulnawfal11011@gmail.com";
 
 const MENU = [
   { label: "Work", href: "/work" },
@@ -9,10 +9,10 @@ const MENU = [
 ];
 
 const ELSEWHERE = [
-  { label: "LinkedIn", href: "https://linkedin.com/in/" },
-  { label: "GitHub", href: "https://github.com/" },
-  { label: "Dribbble", href: "https://dribbble.com/" },
-  { label: "Behance", href: "https://behance.net/" },
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/abdulnawfal/" },
+  { label: "GitHub", href: "https://github.com/abdulnawfalm" },
+  { label: "Dribbble", href: "https://dribbble.com/abdulnawfal" },
+  { label: "Behance", href: "https://www.behance.net/AbdulNawfal" },
 ];
 
 function LinkList({
@@ -62,7 +62,7 @@ export default function Footer() {
 
           <Link
             href="/contact"
-            className="group inline-flex w-full items-center justify-between gap-4 rounded-full bg-white py-3 pl-7 pr-3 text-base font-medium text-black transition-colors duration-300 hover:bg-white/85 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white motion-reduce:transition-none sm:w-auto sm:shrink-0 sm:justify-start"
+            className="group inline-flex w-full items-center justify-between gap-4 rounded-full bg-lime-300 py-3 pl-7 pr-3 text-base font-medium text-black transition-colors duration-300 hover:bg-lime-200 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-lime-300 motion-reduce:transition-none sm:w-auto sm:shrink-0 sm:justify-start"
           >
             Say hello
             <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-black text-white transition-transform duration-300 group-hover:rotate-45 motion-reduce:transition-none">

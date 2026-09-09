@@ -2,8 +2,13 @@
 
 import { useEffect, useRef, useState } from "react";
 
-/** Put the file at /public/abdul-nawfal-cv.pdf, or point this at wherever it lives */
-const CV_PATH = "/abdul-nawfal-cv.pdf";
+import { RESUMES } from "@/lib/chat-answers";
+
+/** Paths live in one place — chat-answers.ts — so both offer the same files */
+const CVS = [
+  { label: "CV for UAE", href: RESUMES.dubai },
+  { label: "CV for Finland", href: RESUMES.helsinki },
+];
 
 const STATEMENT = "Designing the experience behind better products.";
 
@@ -16,9 +21,9 @@ const STATS = [
 /** Newest first. Recognition sits under the role that earned it. */
 const EXPERIENCE = [
   {
-    role: "UI/UX Designer",
-    company: "Company name",
-    period: "2023 — 2025",
+    role: "UI/UX Designer & Graphic Designer",
+    company: "Your Office Partners",
+    period: "2025 — 2025",
     note: "Employee of the Month",
   },
 ];
@@ -71,6 +76,29 @@ function DownloadIcon({ className = "" }: { className?: string }) {
 export default function About() {
   const { ref, inView } = useInView<HTMLDivElement>();
   const stats = useInView<HTMLDListElement>();
+  const [pickerOpen, setPickerOpen] = useState(false);
+  const pickerRef = useRef<HTMLDivElement>(null);
+
+  // Clicking away or pressing Escape dismisses the picker
+  useEffect(() => {
+    if (!pickerOpen) return;
+
+    const onDown = (event: MouseEvent) => {
+      if (!pickerRef.current?.contains(event.target as Node)) {
+        setPickerOpen(false);
+      }
+    };
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setPickerOpen(false);
+    };
+
+    document.addEventListener("mousedown", onDown);
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("mousedown", onDown);
+      document.removeEventListener("keydown", onKey);
+    };
+  }, [pickerOpen]);
 
   return (
     <section id="about" className="bg-black px-5 py-20 sm:px-8 sm:py-28 lg:px-12">
@@ -125,23 +153,48 @@ export default function About() {
           >
             <div className="space-y-5 text-base leading-relaxed text-white/70 sm:text-lg">
               <p>
-                I'm a UI/UX and Product Designer with two years of experience designing and developing digital products. 
+                I&rsquo;m a UI/UX and Product Designer with two years of experience designing and developing digital products.
                 I design in Figma (including Figma AI) and bring those designs to life using modern front-end technologies
               </p>
               <p>
-                working across both web and mobile platforms. I use AI tools throughout my workflow to move faster without 
+                working across both web and mobile platforms. I use AI tools throughout my workflow to move faster without
                 compromising quality, allowing me to deliver projects efficiently based on scope and timeline.
               </p>
             </div>
 
-            <a
-              href={CV_PATH}
-              download
-              className="group inline-flex items-center gap-3 rounded-full border border-white/25 py-3 pl-6 pr-5 text-sm text-white transition-colors duration-300 hover:border-white hover:bg-white hover:text-black focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white motion-reduce:transition-none"
-            >
-              Download CV
-              <DownloadIcon className="h-4 w-4 transition-transform duration-300 group-hover:translate-y-0.5 motion-reduce:transition-none" />
-            </a>
+            {/* One button; the choice of market only appears once asked for */}
+            <div ref={pickerRef} className="relative w-fit">
+              <button
+                type="button"
+                onClick={() => setPickerOpen((v) => !v)}
+                aria-expanded={pickerOpen}
+                aria-haspopup="true"
+                className="group inline-flex items-center gap-3 rounded-full border border-white/25 py-3 pl-6 pr-5 text-sm text-white transition-colors duration-300 hover:border-white hover:bg-white hover:text-black focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white motion-reduce:transition-none"
+              >
+                Download CV
+                <DownloadIcon className="h-4 w-4 transition-transform duration-300 group-hover:translate-y-0.5 motion-reduce:transition-none" />
+              </button>
+
+              {pickerOpen ? (
+                <div className="absolute left-0 top-full z-20 mt-3 w-64 overflow-hidden rounded-2xl border border-white/12 bg-[#0b0b0b] p-2 shadow-2xl">
+                  <p className="px-3 py-2 text-xs text-white/40">
+                    Which version?
+                  </p>
+                  {CVS.map((cv) => (
+                    <a
+                      key={cv.label}
+                      href={cv.href}
+                      download
+                      onClick={() => setPickerOpen(false)}
+                      className="flex items-center justify-between rounded-xl px-3 py-2.5 text-sm text-white/80 transition-colors hover:bg-white/[0.06] hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+                    >
+                      {cv.label}
+                      <DownloadIcon className="h-4 w-4 text-white/40" />
+                    </a>
+                  ))}
+                </div>
+              ) : null}
+            </div>
           </div>
         </div>
 

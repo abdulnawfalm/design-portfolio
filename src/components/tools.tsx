@@ -2,27 +2,27 @@
 
 import { useState } from "react";
 
-type Tool = { name: string; slug: string };
+type Tool = { name: string; icon: string };
 
 /**
- * Icons load from /public/tools/<slug>.svg.
- * Any that are missing fall back to a monogram tile, so the row is
- * never broken while you collect the files.
+ * `icon` is the path inside /public — any format works (.svg, .png, .webp),
+ * and they can differ per tool. Anything missing falls back to a monogram
+ * tile, so the row is never broken while you collect the files.
  */
 const TOOLS: Tool[] = [
-  { name: "Figma", slug: "figma" },
-  { name: "Figma AI", slug: "figma-ai" },
-  { name: "Claude", slug: "claude" },
-  { name: "Lovable", slug: "lovable" },
-  { name: "Adobe InDesign", slug: "indesign" },
-  { name: "Framer", slug: "framer" },
-  { name: "ChatGPT", slug: "chatgpt" },
-  { name: "Stitch AI", slug: "stitch-ai" },
-  { name: "Adobe Illustrator", slug: "illustrator" },
-  { name: "Visual Studio Code", slug: "vscode" },
-  { name: "Git", slug: "git" },
-  { name: "GitHub", slug: "github" },
-  { name: "Vercel", slug: "vercel" },
+  { name: "Figma", icon: "/tools/figma.png" },
+  { name: "Figma AI", icon: "/tools/figma-ai.png" },
+  { name: "Claude", icon: "/tools/claude.svg" },
+  { name: "Lovable", icon: "/tools/lovable.svg" },
+  { name: "Adobe InDesign", icon: "/tools/indesign.png" },
+  { name: "Framer", icon: "/tools/framer.svg" },
+  { name: "ChatGPT", icon: "/tools/chatgpt.png" },
+  { name: "Adobe XD", icon: "/tools/adobexd.png" },
+  { name: "Adobe Illustrator", icon: "/tools/illustrator.png" },
+  { name: "Visual Studio Code", icon: "/tools/vscode.svg" },
+  { name: "Git", icon: "/tools/git.png" },
+  { name: "GitHub", icon: "/tools/github.png" },
+  { name: "Vercel", icon: "/tools/vercel.png" },
 ];
 
 /** Seconds for one full pass — raise it to slow the row down */
@@ -53,7 +53,7 @@ function ToolIcon({ tool }: { tool: Tool }) {
   return (
     // eslint-disable-next-line @next/next/no-img-element
     <img
-      src={`/tools/${tool.slug}.svg`}
+      src={tool.icon}
       alt=""
       width={24}
       height={24}
@@ -80,7 +80,7 @@ export default function Tools() {
     <section className="bg-black py-20 sm:py-28">
       <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-12">
         <h2 className="text-2xl font-semibold tracking-tight text-white sm:text-3xl">
-          Tools
+          Tools/Software
         </h2>
       </div>
 
@@ -118,7 +118,7 @@ export default function Tools() {
                 className="flex shrink-0 items-center"
               >
                 {TOOLS.map((tool) => (
-                  <ToolPill key={`${copy}-${tool.slug}`} tool={tool} />
+                  <ToolPill key={`${copy}-${tool.name}`} tool={tool} />
                 ))}
               </ul>
             ))}
