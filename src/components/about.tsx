@@ -6,6 +6,7 @@ import { RESUMES } from "@/lib/chat-answers";
 
 /** Paths live in one place — chat-answers.ts — so both offer the same files */
 const CVS = [
+  { label: "CV for India", href: RESUMES.india },
   { label: "CV for UAE", href: RESUMES.dubai },
   { label: "CV for Finland", href: RESUMES.helsinki },
 ];

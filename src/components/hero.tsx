@@ -73,7 +73,7 @@ export default function Hero() {
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-lime-300/70 motion-reduce:hidden" />
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-lime-300" />
               </span>
-              Open to relocate Dubai, UAE
+              Open to relocate
             </span>
           </div>
         </div>

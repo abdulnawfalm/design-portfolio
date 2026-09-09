@@ -8,6 +8,7 @@ export type Answer = {
 
 /** Both files live in /public. Add them when ready — the paths are already wired. */
 export const RESUMES = {
+  india: "/Abdul_Nawfal_UIUX_Designer_India.pdf",
   dubai: "/Abdul_Nawfal_UIUX_Designer.pdf",
   helsinki: "/Abdul_Nawfal_UIUX_Designer_Finland.pdf",
 };
@@ -30,19 +31,21 @@ export const QUICK_PROMPTS: { label: string; question: string }[] = [
 export const ANSWERS: Answer[] = [
   {
     match: ["resume", "resumé", "cv", "download", "curriculum", "profile pdf"],
-    text: "There are two versions. Which location is the role in?",
+    text: "There are three versions. Which location is the role in?",
     links: [
-      { label: "Resume — Dubai, UAE", href: RESUMES.dubai, download: true },
-      { label: "Resume — Helsinki, Finland", href: RESUMES.helsinki, download: true },
+      { label: "India", href: RESUMES.india, download: true },
+      { label: "Dubai, UAE", href: RESUMES.dubai, download: true },
+      { label: "Helsinki, Finland", href: RESUMES.helsinki, download: true },
     ],
   },
   {
-    match: ["relocate", "relocation", "relocating", "move", "moving", "shift", "dubai", "uae", "emirates", "helsinki", "finland", "abroad", "overseas", "visa", "sponsor", "onsite", "on-site"],
+    match: ["relocate", "relocation", "relocating", "move", "moving", "shift", "dubai", "uae", "emirates", "helsinki", "finland", "abroad", "overseas", "visa", "sponsor", "onsite", "on-site", "bangalore", "bengaluru", "india", "chennai"],
     text:
-      "Yes. I'm actively open to relocating to Dubai, UAE or Helsinki, Finland, and I have a resume tailored to each. I'm currently based in Chennai, India.",
+      "I'm based in Chennai and open to roles across India, including Chennai and Bangalore. I'm also actively open to relocating to Dubai, UAE or Helsinki, Finland. There's a resume tailored to each.",
     links: [
-      { label: "Resume — Dubai, UAE", href: RESUMES.dubai, download: true },
-      { label: "Resume — Helsinki, Finland", href: RESUMES.helsinki, download: true },
+      { label: "India", href: RESUMES.india, download: true },
+      { label: "Dubai, UAE", href: RESUMES.dubai, download: true },
+      { label: "Helsinki, Finland", href: RESUMES.helsinki, download: true },
     ],
   },
   {
@@ -86,7 +89,7 @@ export const ANSWERS: Answer[] = [
   {
     match: ["location", "located", "based", "where", "live", "city", "country", "chennai", "india", "timezone", "time zone"],
     text:
-      "Chennai, India, and working across time zones already. Open to relocating to Dubai or Helsinki.",
+      "Based in Chennai, India, and already working across time zones. Open to roles in Chennai and Bangalore, and to relocating to Dubai or Helsinki.",
   },
 ];
 
