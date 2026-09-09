@@ -2,10 +2,14 @@
 
 import { useEffect, useRef, useState } from "react";
 
+/**
+ * DRAFT quotes for cards 1 and 3 — written from the work, not from the person.
+ * Replace with their own words, and get permission, before this goes live.
+ */
 const TESTIMONIALS = [
   {
     quote:
-      "He came in to design the interface and ended up shaping how we thought about the product. The smoothest handoff we've had, because there wasn't really a handoff.",
+      "Abdul took on our ship chartering and HR products and delivered work well beyond what we expected at his level. He asks the right questions early, learns an unfamiliar domain quickly, and hands over designs the development team can build from without a long back and forth. Dependable, and genuinely invested in the outcome.",
     name: "Mohamed Saleem",
     role: "Managing Director",
     company: "Your Office Partners",
@@ -19,7 +23,7 @@ const TESTIMONIALS = [
   },
   {
     quote:
-      "Reliable on deadlines and easy to work with across teams. He explains design decisions in a way non-designers can actually act on.",
+      "Abdul worked across several client projects with us, from a vendor management platform to an internal banking dashboard. He turned complicated requirements into interfaces our clients found easy to use, met his deadlines consistently, and explained his design decisions in a way non-designers could act on. A genuine asset to the team.",
     name: "Aananth Kirshnamoorthy",
     role: "Senior Manager",
     company: "NGEN LABS",

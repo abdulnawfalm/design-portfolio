@@ -16,6 +16,7 @@ const NAV: NavItem[] = [
 
 /** Same two files the About section and the chat offer */
 const CVS = [
+  { label: "CV for India", href: RESUMES.india },
   { label: "CV for UAE", href: RESUMES.dubai },
   { label: "CV for Finland", href: RESUMES.helsinki },
 ];
@@ -102,6 +103,7 @@ export default function SiteHeader() {
   const isCurrent = useIsCurrent();
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [cvOpen, setCvOpen] = useState(false);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
 
@@ -114,6 +116,10 @@ export default function SiteHeader() {
   useEffect(() => {
     setMenuOpen(false);
   }, [pathname]);
+
+  useEffect(() => {
+    if (!menuOpen) setCvOpen(false);
+  }, [menuOpen]);
 
   // Escape closes, and the page behind the panel stops scrolling.
   useEffect(() => {
@@ -291,34 +297,60 @@ export default function SiteHeader() {
             Open to opportunities
           </p>
 
-          <div className="mt-5 space-y-3">
-            {CVS.map((cv) => (
-              <a
-                key={cv.label}
-                href={cv.href}
-                download
-                tabIndex={menuOpen ? undefined : -1}
-                className="group flex w-full items-center justify-between rounded-full border border-white/25 py-3 pl-6 pr-3 text-base text-white transition-colors duration-300 hover:border-white hover:bg-white hover:text-black focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white motion-reduce:transition-none"
-              >
-                {cv.label}
-                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-white/20 group-hover:border-black/20">
-                  <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    aria-hidden="true"
-                    className="h-4 w-4"
+          <div className="mt-5">
+            <button
+              type="button"
+              onClick={() => setCvOpen((v) => !v)}
+              aria-expanded={cvOpen}
+              tabIndex={menuOpen ? undefined : -1}
+              className="group flex w-full items-center justify-between rounded-full border border-white/25 py-3 pl-6 pr-3 text-base text-white transition-colors duration-300 hover:border-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white motion-reduce:transition-none"
+            >
+              Download resume
+              <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-white/20">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden="true"
+                  className={`h-4 w-4 transition-transform duration-300 ${cvOpen ? "rotate-180" : ""}`}
+                >
+                  <path d="m6 9 6 6 6-6" />
+                </svg>
+              </span>
+            </button>
+
+            {cvOpen ? (
+              <div className="mt-2 space-y-1">
+                {CVS.map((cv) => (
+                  <a
+                    key={cv.label}
+                    href={cv.href}
+                    download
+                    tabIndex={menuOpen ? undefined : -1}
+                    className="flex items-center justify-between rounded-2xl px-6 py-3 text-sm text-white/75 transition-colors hover:bg-white/[0.06] hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
                   >
-                    <path d="M12 4v11" />
-                    <path d="m7.5 10.5 4.5 4.5 4.5-4.5" />
-                    <path d="M5 20h14" />
-                  </svg>
-                </span>
-              </a>
-            ))}
+                    {cv.label}
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      aria-hidden="true"
+                      className="h-4 w-4 text-white/40"
+                    >
+                      <path d="M12 4v11" />
+                      <path d="m7.5 10.5 4.5 4.5 4.5-4.5" />
+                      <path d="M5 20h14" />
+                    </svg>
+                  </a>
+                ))}
+              </div>
+            ) : null}
           </div>
 
           <div className="mt-8 flex items-baseline justify-between text-[11px] text-white/35">
