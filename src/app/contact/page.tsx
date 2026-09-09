@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
-import ContactForm from "@/components/contact form";
+import ContactForm from "@/components/contact-form";
 import Footer from "@/components/footer";
 import SiteHeader from "@/components/site-header";
 
@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     "Get in touch about product design, interface design and front-end work.",
 };
 
-const EMAIL = "hello@abdulnawfal.com";
+const EMAIL = "abdulnawfal11011@gmail.com";
 
 const DETAILS = [
   { label: "Email", value: EMAIL, href: `mailto:${EMAIL}` },
@@ -30,6 +30,7 @@ export default function ContactPage() {
       >
         <div className="mx-auto max-w-7xl">
           <div className="grid gap-16 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:gap-24">
+            {/* Left column stays put while the form scrolls beside it */}
             <div className="lg:sticky lg:top-32 lg:self-start">
               <h1 className="text-4xl font-semibold leading-[1.05] tracking-tight text-white sm:text-6xl">
                 Say hello.

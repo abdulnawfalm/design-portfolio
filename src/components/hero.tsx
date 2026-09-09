@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 const INTRO =
-  "Clean, minimal interfaces for product-focused design from Figma to front end.";
+  "Clean, minimal interfaces driven by product thinking.";
 
 export default function Hero() {
   return (
@@ -42,7 +42,7 @@ export default function Hero() {
             </span>
             <span className="block overflow-hidden pb-[0.06em]">
               <span
-                className="hero-line block text-[clamp(2.5rem,10.5vw,9rem)] text-white/35"
+                className="hero-line block text-[clamp(2.5rem,10.5vw,9rem)] text-lime-300"
                 style={{ animationDelay: "200ms" }}
               >
                 Product Designer
@@ -50,18 +50,32 @@ export default function Hero() {
             </span>
           </h1>
 
-          {/* Word-by-word blur-in reads as typing without a caret */}
-          <p className="mt-8 max-w-[48ch] text-base leading-relaxed text-white/60 sm:mt-12 sm:text-lg">
-            {INTRO.split(" ").map((word, i) => (
-              <span
-                key={`${word}-${i}`}
-                className="hero-word mr-[0.28em]"
-                style={{ animationDelay: `${620 + i * 30}ms` }}
-              >
-                {word}
+          {/* Intro left, relocation badge right — both sit on one baseline */}
+          <div className="mt-8 flex flex-col gap-6 sm:mt-12 sm:flex-row sm:items-center sm:justify-between sm:gap-10">
+            {/* Word-by-word blur-in reads as typing without a caret */}
+            <p className="max-w-[48ch] text-base leading-relaxed text-white/60 sm:text-lg">
+              {INTRO.split(" ").map((word, i) => (
+                <span
+                  key={`${word}-${i}`}
+                  className="hero-word mr-[0.28em]"
+                  style={{ animationDelay: `${620 + i * 30}ms` }}
+                >
+                  {word}
+                </span>
+              ))}
+            </p>
+
+            <span
+              className="hero-fade inline-flex w-fit shrink-0 items-center gap-2.5 rounded-full border border-lime-300/30 bg-lime-300/[0.08] py-2 pl-3 pr-4 text-sm text-lime-100"
+              style={{ animationDelay: "1300ms" }}
+            >
+              <span className="relative flex h-2 w-2" aria-hidden="true">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-lime-300/70 motion-reduce:hidden" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-lime-300" />
               </span>
-            ))}
-          </p>
+              Open to relocate Dubai, UAE
+            </span>
+          </div>
         </div>
 
         {/* Closing rule ties the hero to the sections below it */}

@@ -4,12 +4,20 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
 
+import { RESUMES } from "@/lib/chat-answers";
+
 type NavItem = { label: string; href: string };
 
 const NAV: NavItem[] = [
-  { label: "WORK", href: "/#work" }, // Selected Work section
-  { label: "ABOUT", href: "/#about" }, // section on the home page
-  { label: "CONTACT", href: "/contact" },
+  { label: "Work", href: "/#work" }, // Selected Work section
+  { label: "About", href: "/#about" }, // section on the home page
+  { label: "Contact", href: "/contact" },
+];
+
+/** Same two files the About section and the chat offer */
+const CVS = [
+  { label: "CV for UAE", href: RESUMES.dubai },
+  { label: "CV for Finland", href: RESUMES.helsinki },
 ];
 
 const LOCATION = "CHENNAI, INDIA";
@@ -66,7 +74,7 @@ function RollingLink({ item, current }: { item: NavItem; current: boolean }) {
       href={item.href}
       aria-current={current ? "page" : undefined}
       className={[
-        "group block py-1 text-xs transition-colors hover:text-white focus-visible:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white",
+        "group block py-1 text-sm transition-colors hover:text-white focus-visible:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white",
         current ? "text-white" : "text-white/70",
       ].join(" ")}
     >
@@ -94,7 +102,6 @@ export default function SiteHeader() {
   const isCurrent = useIsCurrent();
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
 
@@ -107,14 +114,6 @@ export default function SiteHeader() {
   useEffect(() => {
     setMenuOpen(false);
   }, [pathname]);
-
-  // Frost the bar once the page moves, so it stays legible over the hero.
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
 
   // Escape closes, and the page behind the panel stops scrolling.
   useEffect(() => {
@@ -135,14 +134,7 @@ export default function SiteHeader() {
   }, [menuOpen, closeMenu]);
 
   return (
-    <header
-      className={[
-        "fixed inset-x-0 top-0 z-50 transition-colors duration-300",
-        scrolled && !menuOpen
-          ? "border-b border-white/10 bg-black/40 backdrop-blur-xl"
-          : "border-b border-transparent",
-      ].join(" ")}
-    >
+    <header className="fixed inset-x-0 top-0 z-50">
       <style>{`
         @keyframes header-in {
           from { opacity: 0; transform: translateY(-10px) }
@@ -243,17 +235,17 @@ export default function SiteHeader() {
         style={{ transitionTimingFunction: EASE }}
       >
         <nav aria-label="Primary mobile">
-          <ul className="flex flex-col gap-1">
+          <ul className="border-t border-white/10">
             {NAV.map((item, i) => (
-              <li key={item.href} className="overflow-hidden">
+              <li key={item.href} className="overflow-hidden border-b border-white/10">
                 <Link
                   href={item.href}
                   onClick={closeMenu}
                   tabIndex={menuOpen ? undefined : -1}
                   aria-current={isCurrent(item.href) ? "page" : undefined}
                   className={[
-                    "block py-3 text-3xl font-semibold",
-                    isCurrent(item.href) ? "text-white" : "text-white/80",
+                    "flex items-center justify-between py-5 text-3xl font-medium tracking-tight",
+                    isCurrent(item.href) ? "text-white" : "text-white/85",
                     "transition-[transform,opacity] duration-[380ms] motion-reduce:transition-none",
                     "focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white",
                     menuOpen ? "translate-y-0 opacity-100" : "translate-y-full opacity-0",
@@ -264,6 +256,19 @@ export default function SiteHeader() {
                   }}
                 >
                   {item.label}
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    aria-hidden="true"
+                    className="h-5 w-5 text-white/30"
+                  >
+                    <path d="M7 17 17 7" />
+                    <path d="M8 7h9v9" />
+                  </svg>
                 </Link>
               </li>
             ))}
@@ -272,19 +277,59 @@ export default function SiteHeader() {
 
         <div
           className={[
-            "flex items-baseline justify-between text-[11px] text-white/45",
             "transition-opacity duration-300 motion-reduce:transition-none",
             menuOpen ? "opacity-100" : "opacity-0",
           ].join(" ")}
           style={{ transitionDelay: menuOpen ? "260ms" : "0ms" }}
         >
-          <span
-            className="inline-block min-w-[4.5rem] font-mono tabular-nums"
-            suppressHydrationWarning
-          >
-            {time ?? "\u00A0"}
-          </span>
-          <span>{LOCATION}</span>
+          {/* Availability, then the one thing worth taking away from the menu */}
+          <p className="flex items-center gap-2.5 text-sm text-white/60">
+            <span className="relative flex h-2 w-2" aria-hidden="true">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-lime-300/70 motion-reduce:hidden" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-lime-300" />
+            </span>
+            Open to opportunities
+          </p>
+
+          <div className="mt-5 space-y-3">
+            {CVS.map((cv) => (
+              <a
+                key={cv.label}
+                href={cv.href}
+                download
+                tabIndex={menuOpen ? undefined : -1}
+                className="group flex w-full items-center justify-between rounded-full border border-white/25 py-3 pl-6 pr-3 text-base text-white transition-colors duration-300 hover:border-white hover:bg-white hover:text-black focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white motion-reduce:transition-none"
+              >
+                {cv.label}
+                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-white/20 group-hover:border-black/20">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    aria-hidden="true"
+                    className="h-4 w-4"
+                  >
+                    <path d="M12 4v11" />
+                    <path d="m7.5 10.5 4.5 4.5 4.5-4.5" />
+                    <path d="M5 20h14" />
+                  </svg>
+                </span>
+              </a>
+            ))}
+          </div>
+
+          <div className="mt-8 flex items-baseline justify-between text-[11px] text-white/35">
+            <span
+              className="inline-block min-w-[4.5rem] font-mono tabular-nums"
+              suppressHydrationWarning
+            >
+              {time ?? "\u00A0"}
+            </span>
+            <span>{LOCATION}</span>
+          </div>
         </div>
       </div>
     </header>
