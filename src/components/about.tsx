@@ -2,14 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 
-import { RESUMES } from "@/lib/chat-answers";
-
-/** Paths live in one place — chat-answers.ts — so both offer the same files */
-const CVS = [
-  { label: "CV for India", href: RESUMES.india },
-  { label: "CV for UAE", href: RESUMES.dubai },
-  { label: "CV for Finland", href: RESUMES.helsinki },
-];
+import { RESUME } from "@/lib/chat-answers";
 
 const STATEMENT = "Designing the experience behind better products.";
 
@@ -24,7 +17,7 @@ const EXPERIENCE = [
   {
     role: "UI/UX Designer & Graphic Designer",
     company: "Your Office Partners",
-    period: "2025 — 2025",
+    period: "2025 - 2025",
     note: "Employee of the Month",
   },
 ];
@@ -77,29 +70,6 @@ function DownloadIcon({ className = "" }: { className?: string }) {
 export default function About() {
   const { ref, inView } = useInView<HTMLDivElement>();
   const stats = useInView<HTMLDListElement>();
-  const [pickerOpen, setPickerOpen] = useState(false);
-  const pickerRef = useRef<HTMLDivElement>(null);
-
-  // Clicking away or pressing Escape dismisses the picker
-  useEffect(() => {
-    if (!pickerOpen) return;
-
-    const onDown = (event: MouseEvent) => {
-      if (!pickerRef.current?.contains(event.target as Node)) {
-        setPickerOpen(false);
-      }
-    };
-    const onKey = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setPickerOpen(false);
-    };
-
-    document.addEventListener("mousedown", onDown);
-    document.addEventListener("keydown", onKey);
-    return () => {
-      document.removeEventListener("mousedown", onDown);
-      document.removeEventListener("keydown", onKey);
-    };
-  }, [pickerOpen]);
 
   return (
     <section id="about" className="bg-black px-5 py-20 sm:px-8 sm:py-28 lg:px-12">
@@ -163,39 +133,14 @@ export default function About() {
               </p>
             </div>
 
-            {/* One button; the choice of market only appears once asked for */}
-            <div ref={pickerRef} className="relative w-fit">
-              <button
-                type="button"
-                onClick={() => setPickerOpen((v) => !v)}
-                aria-expanded={pickerOpen}
-                aria-haspopup="true"
-                className="group inline-flex items-center gap-3 rounded-full border border-white/25 py-3 pl-6 pr-5 text-sm text-white transition-colors duration-300 hover:border-white hover:bg-white hover:text-black focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white motion-reduce:transition-none"
-              >
-                Download CV
-                <DownloadIcon className="h-4 w-4 transition-transform duration-300 group-hover:translate-y-0.5 motion-reduce:transition-none" />
-              </button>
-
-              {pickerOpen ? (
-                <div className="absolute left-0 top-full z-20 mt-3 w-64 overflow-hidden rounded-2xl border border-white/12 bg-[#0b0b0b] p-2 shadow-2xl">
-                  <p className="px-3 py-2 text-xs text-white/40">
-                    Which version?
-                  </p>
-                  {CVS.map((cv) => (
-                    <a
-                      key={cv.label}
-                      href={cv.href}
-                      download
-                      onClick={() => setPickerOpen(false)}
-                      className="flex items-center justify-between rounded-xl px-3 py-2.5 text-sm text-white/80 transition-colors hover:bg-white/[0.06] hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
-                    >
-                      {cv.label}
-                      <DownloadIcon className="h-4 w-4 text-white/40" />
-                    </a>
-                  ))}
-                </div>
-              ) : null}
-            </div>
+            <a
+              href={RESUME}
+              download
+              className="group inline-flex items-center gap-3 rounded-full border border-white/25 py-3 pl-6 pr-5 text-sm text-white transition-colors duration-300 hover:border-white hover:bg-white hover:text-black focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white motion-reduce:transition-none"
+            >
+              Download CV
+              <DownloadIcon className="h-4 w-4 transition-transform duration-300 group-hover:translate-y-0.5 motion-reduce:transition-none" />
+            </a>
           </div>
         </div>
 

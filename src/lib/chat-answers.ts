@@ -6,12 +6,8 @@ export type Answer = {
   links?: { label: string; href: string; download?: boolean }[];
 };
 
-/** Both files live in /public. Add them when ready — the paths are already wired. */
-export const RESUMES = {
-  india: "/Abdul_Nawfal_UIUX_Designer_India.pdf",
-  dubai: "/Abdul_Nawfal_UIUX_Designer.pdf",
-  helsinki: "/Abdul_Nawfal_UIUX_Designer_Finland.pdf",
-};
+/** One resume, used for every application. Lives in /public. */
+export const RESUME = "/Abdul_Nawfal_UIUX_Designer.pdf";
 
 /** Short label on the chip, full question sent to the answer engine */
 export const QUICK_PROMPTS: { label: string; question: string }[] = [
@@ -19,7 +15,7 @@ export const QUICK_PROMPTS: { label: string; question: string }[] = [
   { label: "Relocation", question: "Are you open to relocating?" },
   { label: "Experience", question: "How many years of experience do you have?" },
   { label: "Availability", question: "Are you available for full-time roles?" },
-  { label: "Specialisms", question: "What do you specialize in?" },
+  { label: "specialize ", question: "What do you specialize in?" },
   { label: "Design process", question: "Walk me through your design process" },
 ];
 
@@ -31,22 +27,14 @@ export const QUICK_PROMPTS: { label: string; question: string }[] = [
 export const ANSWERS: Answer[] = [
   {
     match: ["resume", "resumé", "cv", "download", "curriculum", "profile pdf"],
-    text: "There are three versions. Which location is the role in?",
-    links: [
-      { label: "India", href: RESUMES.india, download: true },
-      { label: "Dubai, UAE", href: RESUMES.dubai, download: true },
-      { label: "Helsinki, Finland", href: RESUMES.helsinki, download: true },
-    ],
+    text: "Here it is.",
+    links: [{ label: "Download resume", href: RESUME, download: true }],
   },
   {
-    match: ["relocate", "relocation", "relocating", "move", "moving", "shift", "dubai", "uae", "emirates", "helsinki", "finland", "abroad", "overseas", "visa", "sponsor", "onsite", "on-site", "bangalore", "bengaluru", "india", "chennai"],
+    match: ["relocate", "relocation", "relocating", "move", "moving", "shift", "dubai", "uae", "emirates", "abroad", "overseas", "visa", "sponsor", "onsite", "on-site", "bangalore", "bengaluru", "india", "chennai"],
     text:
-      "I'm based in Chennai and open to roles across India, including Chennai and Bangalore. I'm also actively open to relocating to Dubai, UAE or Helsinki, Finland. There's a resume tailored to each.",
-    links: [
-      { label: "India", href: RESUMES.india, download: true },
-      { label: "Dubai, UAE", href: RESUMES.dubai, download: true },
-      { label: "Helsinki, Finland", href: RESUMES.helsinki, download: true },
-    ],
+      "Open to roles across India, including Chennai and Bangalore, and to relocating to Dubai, UAE. Visa sponsorship would be required for the UAE.",
+    links: [{ label: "Download resume", href: RESUME, download: true }],
   },
   {
     match: ["experience", "experienced", "years", "year", "yrs", "how long", "senior", "junior", "level", "background", "career", "worked"],
@@ -54,15 +42,15 @@ export const ANSWERS: Answer[] = [
       "2.5 years across UI/UX and product design, with 20+ projects shipped. Most recently a UI/UX Designer role covering HR software, a ship chartering platform, and client web work.",
   },
   {
-    match: ["available", "availability", "free", "full time", "full-time", "fulltime", "part time", "hire", "hiring", "join", "start", "notice", "period", "freelance", "contract", "remote", "open to"],
+    match: ["available", "availability", "free", "full time", "full-time", "fulltime", "part time", "hire", "hiring", "join", "start", "notice", "period", "open to", "on-site", "onsite", "office"],
     text:
-      "Yes, available for full-time roles, and open to freelance alongside that. Remote, hybrid, or on-site in Dubai or Helsinki.",
+      "Yes, looking for a full-time UI/UX Designer or Product Designer role, on-site and working from the office. Open to positions across India and the UAE, and available immediately.",
     links: [{ label: "Get in touch", href: "/contact" }],
   },
   {
     match: ["specialize", "specialise", "specialty", "skill", "skills", "what do you do", "what does he do", "expertise", "strength", "good at", "stack", "tech", "react", "next", "front end", "frontend", "front-end", "code", "coding", "develop", "ui", "ux", "design system"],
     text:
-      "Interface and product design first — design systems, dashboards, and complex workflows made simple. I also build front-end in React, Next.js and Tailwind, so my designs ship without a translation layer. Day to day: Figma, Framer, VS Code, and AI tooling.",
+      "Interface and product design first — design systems, dashboards, and complex workflows made simple. I also build front-end in React, Next.js and Tailwind. Figma, VS Code, and AI tooling.",
   },
   {
     match: ["process", "approach", "how do you work", "how does he work", "method", "methodology", "workflow", "steps", "research", "wireframe", "prototype", "handoff", "collaborate", "developers"],
@@ -89,7 +77,7 @@ export const ANSWERS: Answer[] = [
   {
     match: ["location", "located", "based", "where", "live", "city", "country", "chennai", "india", "timezone", "time zone"],
     text:
-      "Based in Chennai, India, and already working across time zones. Open to roles in Chennai and Bangalore, and to relocating to Dubai or Helsinki.",
+      "Based in Tamil Nadu, India, and already working across time zones. Open to roles in Chennai and Bangalore, and to relocating to Dubai.",
   },
 ];
 
@@ -102,7 +90,7 @@ ANSWERS.push(
   {
     match: ["who", "about", "tell me", "introduce", "yourself", "himself", "bio"],
     text:
-      "Abdul Nawfal is a UI/UX and Product Designer based in Chennai, India, with 2.5 years of experience and 20+ projects shipped. He designs interfaces and builds them in React and Next.js, and he's open to full-time roles including relocation to Dubai or Helsinki.",
+      "Abdul Nawfal is a UI/UX and Product Designer based in Chennai, India, with 2.5 years of experience and 20+ projects shipped. He designs interfaces and builds them in React and Next.js, and he's open to full-time roles across India and the UAE.",
     links: [{ label: "See the work", href: "/work" }],
   },
 );
