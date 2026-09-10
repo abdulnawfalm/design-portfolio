@@ -33,11 +33,11 @@ export default function ContactPage() {
             {/* Left column stays put while the form scrolls beside it */}
             <div className="lg:sticky lg:top-32 lg:self-start">
               <h1 className="text-4xl font-semibold leading-[1.05] tracking-tight text-white sm:text-6xl">
-                Say hello.
+               Let’s connect.
               </h1>
               <p className="mt-6 max-w-[34ch] text-base leading-relaxed text-white/55 sm:text-lg">
-                Tell me about the project — what you&rsquo;re building, roughly
-                when, and what you need from me. Rough ideas are welcome.
+                Open to UI/UX and Product Design opportunities, collaborations, 
+                and conversations focused on building better products and creating meaningful career growth.
               </p>
 
               <dl className="mt-12 space-y-6">
